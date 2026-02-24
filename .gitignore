@@ -1,0 +1,45 @@
+# === Dependencies ===
+node_modules/
+
+# === Environment ===
+.env
+.env.local
+.env.*.local
+
+# === Uploads & Exports ===
+uploads/*
+!uploads/.gitkeep
+exports/*
+!exports/.gitkeep
+
+# === Screenshots (Puppeteer) ===
+screenshots/*
+!screenshots/.gitkeep
+
+# === Data ===
+data/master.json
+
+# === Debug Scripts ===
+debug-*.js
+
+# === Logs ===
+logs/
+*.log
+npm-debug.log*
+
+# === OS Files ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === IDE / Editor ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === Misc ===
+*.pid
+*.seed
+*.pid.lock

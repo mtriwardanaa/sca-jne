@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCA Kurir Auto-Submit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🚀 SCA Kurir Auto-Submit</h1>
+            <p>Otomasi pendaftaran kurir SCA via Power Apps</p>
+        </header>
+
+        <!-- Master Data Card -->
+        <div class="card">
+            <div class="card-title">📁 Master Data Kurir</div>
+            <div class="master-status">
+                <div>
+                    <div class="master-count">
+                        <span id="masterCount">0</span>
+                        <small>kurir loaded</small>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <div class="file-upload">
+                        <button class="btn btn-primary" id="uploadBtn">📤 Upload Excel</button>
+                        <input type="file" id="excelFile" accept=".xlsx,.xls">
+                    </div>
+                    <button class="btn btn-danger" id="clearBtn" onclick="clearMaster()">🗑️ Hapus</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Card -->
+        <div class="card">
+            <div class="card-title">📋 Input Courier IDs</div>
+            <div class="textarea-wrap">
+                <label>Paste courier IDs dari WA (pisahkan dengan koma, spasi, atau enter)</label>
+                <textarea id="courierIds" rows="3" placeholder="PNK772, PNK1511, PNK1361, PNK865, PNK893, PNK891"></textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="lookupCouriers()">🔍 Lookup</button>
+                <button class="btn btn-outline" onclick="downloadExcel()" id="downloadBtn" disabled>📥 Download Excel</button>
+            </div>
+        </div>
+
+        <!-- Results Card -->
+        <div class="card results" id="resultsCard">
+            <div class="card-title">📊 Hasil Lookup</div>
+            <div class="result-summary">
+                <div class="stat">
+                    <div class="stat-value total" id="totalInput">0</div>
+                    <div class="stat-label">Total Input</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value found" id="totalFound">0</div>
+                    <div class="stat-label">Ditemukan</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value not-found" id="totalNotFound">0</div>
+                    <div class="stat-label">Tidak Ditemukan</div>
+                </div>
+            </div>
+            <div class="courier-list" id="courierList"></div>
+
+            <div class="card-title" style="margin-top: 16px">📝 Deskripsi Power Apps</div>
+            <div class="desc-preview" id="descPreview"></div>
+
+            <button class="btn btn-success btn-lg" id="submitBtn" onclick="submitToPowerApps()">
+                🚀 Submit ke Power Apps
+            </button>
+        </div>
+
+        <!-- Log Card -->
+        <div class="card log-container" id="logCard">
+            <div class="card-title">📺 Live Log</div>
+            <div class="log-output" id="logOutput"></div>
+        </div>
+
+        <!-- History Card -->
+        <div class="card">
+            <div class="card-title">📜 Riwayat</div>
+            <div id="historyList">
+                <p style="color: var(--text-muted); font-size: 13px;">Belum ada riwayat</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
