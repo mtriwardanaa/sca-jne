@@ -14,6 +14,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use('/', routes);
 
+// WhatsApp Cloud API Webhook
+if (process.env.WA_ENABLED === 'true') {
+    const waWebhook = require('./src/whatsapp/webhook');
+    app.use('/webhook', waWebhook);
+    console.log('📱 WhatsApp Bot aktif — webhook endpoint: /webhook');
+} else {
+    console.log('📱 WhatsApp Bot tidak aktif (WA_ENABLED != true)');
+}
+
 // Start server
 app.listen(PORT, () => {
     console.log(`🚀 SCA Kurir Auto-Submit running at http://localhost:${PORT}`);

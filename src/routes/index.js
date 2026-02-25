@@ -41,6 +41,28 @@ router.get('/api/status', (req, res) => {
 });
 
 // ============================================
+// GET /api/wa-status — WhatsApp Bot status
+// ============================================
+router.get('/api/wa-status', (req, res) => {
+    const enabled = process.env.WA_ENABLED === 'true';
+    const hasToken = !!process.env.WA_ACCESS_TOKEN;
+    const hasPhoneId = !!process.env.WA_PHONE_NUMBER_ID;
+    const keyword = process.env.WA_KEYWORD || 'SCA';
+    const autoSubmit = process.env.WA_AUTO_SUBMIT === 'true';
+
+    res.json({
+        enabled,
+        configured: enabled && hasToken && hasPhoneId,
+        provider: 'meta-cloud-api',
+        keyword,
+        autoSubmit,
+        allowedNumbers: process.env.WA_ALLOWED_NUMBERS
+            ? process.env.WA_ALLOWED_NUMBERS.split(',').length
+            : 0,
+    });
+});
+
+// ============================================
 // POST /api/upload-master — Upload master Excel
 // ============================================
 router.post('/api/upload-master', upload.single('excel'), async (req, res) => {

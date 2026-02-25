@@ -39,6 +39,10 @@ desktop.ini
 *.swo
 *~
 
+# === WhatsApp ===
+.wwebjs_auth/
+.wwebjs_cache/
+
 # === Misc ===
 *.pid
 *.seed
